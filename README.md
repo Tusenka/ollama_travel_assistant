@@ -1,0 +1,1 @@
+# ollama_travel_assistant
