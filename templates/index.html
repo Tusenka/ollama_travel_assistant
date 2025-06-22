@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT Travel Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="far fa-comment-alt"></i>
+                    </div>
+                    <div class="header-info">
+                        <h1>GPT Ассистент для Путешественников</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                           Привет, я AI-ассистент.Могу помочь, например, с выбором аппартаментов: напишите мне даты поездки и город, куда вы планируете поехать, а я порекомендую вам лучшие варианты.
+                            Вы также можете указать ваш бюджет, количество гостей и другие предпочтения, например: ванна у окна или вид на реку.
+                        </div>
+                        <div class="message-time">Сейчас</div>
+                    </div>
+
+                </div>
+            </div>
+                    <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+    </div>
+            <div class="chat-input-container">
+                <div class="input-wrapper">
+                    <input type="text" id="messageInput" placeholder="Введите запрос..." maxlength="500">
+                    <button id="sendButton" class="send-button">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 
