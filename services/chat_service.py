@@ -30,6 +30,7 @@ class ChatService:
     @async_perf_counter
     async def handle_user_message(self, history: List[dict]) -> str:
         intent_result = await self.rag_stage.analyze_and_extract_params(history)
+        logger.info(f"Got a search param {intent_result}", )
 
         if not intent_result.extracted_params:
             return intent_result.response
@@ -51,9 +52,23 @@ class ChatService:
         current_booking_client, hotels_list = (
             await self._get_hotels_list_from_client(params)
         )
-        result: dict = await self.hint_stage.generate(
-            hotels_list, history, intent_result.lang
-        )
+        result: dict = {
+            "response": " Вот лучшие варианты для вашего отдыха, попробуйте их:",
+            "link_text": "Забронировать",
+            "show_all_variants_text": "Показать все варианты",
+            "hotels": [
+                {
+                    "text": h['hotelName'],
+                    "hotel_id": h['hotel_id'],
+                    "city_id": h['city_id'],
+                    "priceAvg": h['priceAvg'],
+                }
+                for h in hotels_list[:4]
+            ],
+        }
+        # res ult= await self.hint_stage.generate(
+        #    hotels_list, history, intent_result.lang
+        # )
 
         hotels_intro: str = result.get("response", "")
         response: str = f"{full_response}\n\n{hotels_intro}\n\n"
@@ -98,7 +113,7 @@ class ChatService:
                     booking_client,
                     e,
                 )
-        logger.warning(
+        logger.info(
             "Got an hotel list with count %d: %s for booking client %s",
             len(hotels_list),
             hotels_list,

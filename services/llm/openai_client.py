@@ -34,4 +34,4 @@ class OpenAiClient(LLMClient):
                 "history": history,
             }
         )
-        return self.safe_json(response)
+        return self.safe_json(response.content)

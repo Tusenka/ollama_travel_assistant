@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 parser = argparse.ArgumentParser()
 parser.add_argument( '-log',
                      '--loglevel',
-                     default='warning',
+                     default='info',
                      help='Provide logging level. Example --loglevel debug, default=info' )
 
 args = parser.parse_args()
@@ -32,7 +32,6 @@ logging.basicConfig( level=args.loglevel.upper() )
 
 app = FastAPI(title="GPT-Assist Travel Bot", debug=True)
 
-# Подключаем статические файлы и шаблоны
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 

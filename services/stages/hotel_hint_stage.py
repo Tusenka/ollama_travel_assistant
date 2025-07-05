@@ -16,7 +16,7 @@ class HotelHintStage:
         )
 
     @async_perf_counter
-    async def generate(self, hotels_list: list, history: list, lang: str) -> dict:
+    async def generate(self, hotels_list: list, history: dict, lang: str) -> dict:
         hotels_text = "\n".join(
             f"- Hotel name:{hotel['hotelName']}; PriceAvg: ${round(hotel['priceAvg'])}; Hotel id: {hotel['hotel_id']}; City id: {hotel['city_id']}; PriceAvg: ${round(hotel['priceAvg'])};"
             for hotel in hotels_list

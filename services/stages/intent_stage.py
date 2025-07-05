@@ -47,26 +47,26 @@ class IntentStage:
         try:
             parameters = SearchParameters.model_validate(extracted_params)
 
-            checkin_year = date.fromisoformat(parameters.check_in).year
-            checkout_year = date.fromisoformat(parameters.check_out).year
-
-            if checkin_year < date.today().year or checkout_year < date.today().year:
-                parameters.check_in = parameters.check_in.replace(
-                    str(checkin_year), str(date.today().year)
-                )
-                parameters.check_out = parameters.check_out.replace(
-                    str(checkin_year), str(date.today().year)
-                )
-
-            if date.fromisoformat(parameters.check_in) < date.today():
-                logger.warning(
-                    f"Warning! check in date {parameters.check_in} is less then today, manually set today date"
-                )
-                check_diff = date.fromisoformat(
-                    parameters.check_out
-                ) - date.fromisoformat(parameters.check_in)
-                parameters.check_in = date.today().isoformat()
-                parameters.check_out = (date.today() + check_diff).isoformat()
+            # checkin_year = date.fromisoformat(parameters.check_in).year
+            # checkout_year = date.fromisoformat(parameters.check_out).year
+            #
+            # if checkin_year < date.today().year or checkout_year < date.today().year:
+            #     parameters.check_in = parameters.check_in.replace(
+            #         str(checkin_year), str(date.today().year)
+            #     )
+            #     parameters.check_out = parameters.check_out.replace(
+            #         str(checkin_year), str(date.today().year)
+            #     )
+            #
+            # if date.fromisoformat(parameters.check_in) < date.today():
+            #     logger.warning(
+            #         f"Warning! check in date {parameters.check_in} is less then today, manually set today date"
+            #     )
+            #     check_diff = date.fromisoformat(
+            #         parameters.check_out
+            #     ) - date.fromisoformat(parameters.check_in)
+            #     parameters.check_in = date.today().isoformat()
+            #     parameters.check_out = (date.today() + check_diff).isoformat()
 
             return parameters
         except BaseException as e:

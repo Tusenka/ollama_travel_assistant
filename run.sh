@@ -1,7 +1,7 @@
 #!/bin/bash
 set +e
 set -x
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ) >> j
 [ ! -f "$SCRIPT_DIR"/.env ] && echo "***file .env doesn't exist***" && exit 1
 set -a && source "$SCRIPT_DIR"/.env && set +a
 
@@ -16,7 +16,7 @@ source "$SCRIPT_DIR"/venv/bin/activate
 echo "***Installing python requirements***"
 pip3 install -r "$SCRIPT_DIR"/requirements.txt
 echo "***Running app***"
-nohup python3 "$SCRIPT_DIR"/main.py >> logs.log &
+python3 "$SCRIPT_DIR"/main.py >> logs.log
 echo "***done***"
 set -e
 set +x
